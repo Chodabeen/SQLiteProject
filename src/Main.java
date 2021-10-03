@@ -24,12 +24,16 @@ public class Main {
 			while (rs1.next()) {
 				String id = rs1.getString("id");
 				String name = rs1.getString("name");
-				System.out.println(id + " " + name);
+				String a_type = rs1.getString("a_type");
+				String a_year = rs1.getString("a_year");
+				String debut = rs1.getString("debut");
+				String regdate = rs1.getString("regdate");
+				System.out.println(id + " " + name + " " + a_type + " " + a_year + " " + debut + " " + regdate);
 			}
 			stat1.close();
 			
 			// 데이터 추가 
-			System.out.println("\n*** 새 데이터 추가 ***");
+			/*System.out.println("\n*** 새 데이터 추가 ***");
 			Statement stat2 = con.createStatement();
 			String sql2 = "insert into g_artists (name, a_type, a_year, debut, regdate)"
 					+ " values ('린', '여성', '2000년대', '2001년', datetime('now', 'localtime'));";
@@ -38,13 +42,13 @@ public class Main {
 				System.out.println("새로운 데이터가 추가되었습니다!");
 			else
 				System.out.println("[Error] 데이터 추가 오류!");
-			stat2.close();
+			stat2.close();*/
 			
 			// 데이터 수정
 			System.out.println("\n*** 데이터 수정 ***");
 			Statement stat3 = con.createStatement();
-			String sql3 = "update g_artists set a_year = '2000년대, 2010년대, 2020년대' "
-					+ "where id=1 ;";
+			String sql3 = "update g_artists set a_year = ' 2020년대' "
+					+ "where id=4 ;";
 			int cnt3 = stat3.executeUpdate(sql3);
 			if(cnt3 > 0)
 				System.out.println("데이터가 수정되었습니다!");
@@ -53,18 +57,33 @@ public class Main {
 			stat3.close();
 			
 			// 데이터 삭제
-			System.out.println("\n*** 데이터 삭제 ***");
+			/*System.out.println("\n*** 데이터 삭제 ***");
 			Statement stat4 = con.createStatement();
 			String sql4 = "delete from g_artists where id = 6; ";
 			int cnt4 = stat4.executeUpdate(sql4);
 			if(cnt4 > 0)
 				System.out.println("데이터가 삭제되었습니다!");
 			else
-				System.out.println("[Error] 데이터 삭 오류!");
-			stat4.close();
+				System.out.println("[Error] 데이터 삭제 오류!");
+			stat4.close();*/
 			
-				
+			// 데이터 조회
+			System.out.println("\n*** 데이터 조회 ***");
+			Statement stat5 = con.createStatement();
+		    String sql5 = "select * from g_artists";
+			ResultSet rs5 = stat5.executeQuery(sql5);
+			while (rs5.next()) {
+				String id = rs5.getString("id");
+				String name = rs5.getString("name");
+				String a_type = rs5.getString("a_type");
+				String a_year = rs5.getString("a_year");
+				String debut = rs5.getString("debut");
+				String regdate = rs5.getString("regdate");
+				System.out.println(id + " " + name + " " + a_type + " " + a_year + " " + debut + " " + regdate);
+			}
+			stat5.close();
 			
+	
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
